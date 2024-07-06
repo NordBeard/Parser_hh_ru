@@ -1,0 +1,30 @@
+services:
+  app:
+    container_name: my_project_app
+    build: ./
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./app:/src/app
+    restart: always
+    env_file:
+      - .env
+  db:
+    container_name: my_project_postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - .postgres:/var/lib/postgres/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    restart: always

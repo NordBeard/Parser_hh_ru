@@ -1,0 +1,10 @@
+﻿beautifulsoup4==4.12.3
+certifi==2024.6.2
+charset-normalizer==3.3.2
+fake-useragent==1.5.1
+idna==3.7
+psycopg2-binary==2.9.9
+pyTelegramBotAPI==4.20.0
+requests==2.32.3
+soupsieve==2.5
+urllib3==2.2.2
